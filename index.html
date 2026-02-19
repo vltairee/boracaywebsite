@@ -1,0 +1,757 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boracay</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        font-family: "Poppoins", sans-serif;
+        height: 100%;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      a,
+      button {
+        cursor: pointer;
+      }
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 15px 50px;
+        z-index: 1000;
+        box-shadow: none;
+        background-color: rgba(0, 0, 0, 0);
+        transition:
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .boracay a {
+        text-decoration: none;
+        font-size: 28px;
+        font-weight: bold;
+        color: #65afeb;
+      }
+      .l {
+        color: crimson;
+      }
+      .boracay a:hover {
+        opacity: 0.8;
+      }
+      /* nav menu*/
+      nav {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+      .myTopnav {
+        display: flex;
+        gap: 20px;
+      }
+      .myTopnav li {
+        display: inline-block;
+        padding: 10px 15px;
+      }
+      .myTopnav a {
+        color: #000000;
+        transition: color 0.3s;
+        font-size: 18px;
+        text-decoration: none;
+      }
+      .myTopnav a:hover {
+        color: #0088a9;
+      }
+
+      /* Hamburger nav */
+      .hamburger {
+        display: none;
+      }
+
+      .hamburger i {
+        color: #004d61;
+      }
+
+      /* Home Section */
+      .home {
+        position: relative;
+        height: 100vh;
+        background: url(img/p1.png) no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .home::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(82, 80, 80, 0.692);
+        z-index: 0;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        text-align: center;
+      }
+      .text {
+        max-width: 700px;
+        z-index: 1;
+      }
+      .text h3 {
+        font-size: 40px;
+        font-style: italic;
+        color: #a10b06;
+      }
+      .text p {
+        font-size: 18px;
+        color: #ffffff;
+      }
+      /* Attractions Section */
+      .attractions {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 5rem 5rem;
+        background-color: #ffffff;
+      }
+      .attractions h2 {
+        text-align: center;
+        font-size: 2.8rem;
+        color: #004d61;
+        margin-bottom: 5rem;
+        position: relative;
+      }
+      .attractions h2::after {
+        content: "";
+        width: 150px;
+        height: 4px;
+        background: #004d61;
+        display: block;
+        margin: auto;
+      }
+      .at-block {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .at-block.reverse {
+        flex-direction: row-reverse;
+      }
+      .at-image {
+        flex: 1;
+        text-align: center;
+      }
+      .at-image img {
+        height: 500px;
+        width: 100%;
+        max-width: 650px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .at-image img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .at-text {
+        flex: 1;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #333;
+      }
+      .at-text h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #004d61;
+        text-align: center;
+      }
+      .at-text h3 span {
+        color: #0077b6;
+      }
+      .at-text p {
+        margin-bottom: 1rem;
+        font-size: 18px;
+        color: #555;
+      }
+      .at-text p span {
+        color: #0077b6;
+      }
+      .at2 {
+        background: #f9fafb;
+        padding: 5rem 2rem;
+        border-radius: 12px;
+      }
+      /* Activities Sections*/
+      .activities {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 4rem;
+        text-align: center;
+        background-color: #f7f9fa;
+      }
+      .activities h2 {
+        font-size: 2.5rem;
+        color: #004d61;
+        margin-bottom: 30px;
+        font-weight: 700;
+        position: relative;
+      }
+      .activities h2::after {
+        content: "";
+        width: 200px;
+        height: 4px;
+        background: #004d61;
+        display: block;
+        margin: 1rem auto 0;
+        border-radius: 2px;
+      }
+      .ac-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        gap: 0;
+      }
+      .ac-card {
+        padding: 2rem 1.5rem;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        transition: transform 0.3s;
+      }
+      .ac-card:hover {
+        transform: translateY(-5px);
+      }
+      .ac-card img {
+        height: 180px;
+        margin: 10px 0;
+        object-fit: contain;
+      }
+      .ac-card h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #006d8f;
+        margin-bottom: 0.5rem;
+      }
+      .ac-card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #444;
+      }
+      /* Gallery Section */
+      .gp {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 4rem;
+        text-align: center;
+        background-color: #f7f9fa;
+      }
+      .gp h2 {
+        font-size: 2.5rem;
+        color: #004d61;
+        margin-bottom: 30px;
+        font-weight: 700;
+        position: relative;
+      }
+      .gp h2::after {
+        content: "";
+        width: 200px;
+        height: 4px;
+        background: #004d61;
+        display: block;
+        margin: 1rem auto 0;
+        border-radius: 2px;
+      }
+      /* Gallery Grid*/
+      .gallery {
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        grid-template-rows: repeat(4, 200px);
+        grid-template-areas: "left1 center right1" "left2 center right2" "left3 center right3" "left4 center right4";
+        gap: 15px;
+        width: 100%;
+        margin: 0;
+      }
+      .left1 {
+        grid-area: left1;
+      }
+      .left2 {
+        grid-area: left2;
+      }
+      .left3 {
+        grid-area: left3;
+      }
+      .left4 {
+        grid-area: left4;
+      }
+      .center {
+        grid-area: center;
+      }
+      .right1 {
+        grid-area: right1;
+      }
+      .right2 {
+        grid-area: right2;
+      }
+      .right3 {
+        grid-area: right3;
+      }
+      .right4 {
+        grid-area: right4;
+      }
+      .gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s;
+      }
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+      /*Media Query Small Screen*/
+      @media screen and (max-width: 768px) {
+        header {
+          padding: 15px 20px;
+          background-color: rgba(0, 0, 0, 0);
+          box-shadow: none;
+        }
+
+        .hamburger {
+          display: block;
+          z-index: 1001;
+        }
+
+        nav {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+        }
+        .myTopnav {
+          display: none;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          background-color: white;
+          flex-direction: column;
+          text-align: center;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding-bottom: 20px;
+        }
+
+        .myTopnav.responsive {
+          display: flex;
+        }
+
+        .myTopnav li {
+          padding: 15px 0;
+          width: 100%;
+        }
+
+        .boracay a {
+          font-size: 22px;
+        }
+
+        .text h3 {
+          font-size: 28px;
+        }
+        .text p {
+          font-size: 14px;
+        }
+
+        .attractions {
+          padding: 3rem 1.5rem;
+        }
+
+        .attractions h2 {
+          font-size: 2rem;
+          margin-bottom: 3rem;
+        }
+
+        .at-block,
+        .at-block.reverse {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .at-image img {
+          height: auto;
+          max-width: 100%;
+        }
+
+        .at-text {
+          text-align: justify;
+        }
+
+        .at-text h3 {
+          font-size: 1.5rem;
+        }
+
+        .at-text p {
+          font-size: 16px;
+        }
+
+        .at2 {
+          padding: 3rem 1.5rem;
+        }
+
+        .activities {
+          padding: 3rem 1.5rem;
+        }
+
+        .activities h2 {
+          font-size: 2rem;
+        }
+
+        .ac-grid {
+          grid-template-columns: 1fr;
+          border-left: none;
+        }
+
+        .ac-card {
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .ac-card img {
+          height: 150px;
+        }
+
+        .gp {
+          padding: 3rem 1.5rem;
+        }
+
+        .gp h2 {
+          font-size: 2rem;
+        }
+
+        .gallery {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 10px;
+        }
+
+        .gallery img {
+          height: 200px;
+          width: 100%;
+        }
+
+        footer {
+          font-size: 12px;
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2 class="boracay">
+        <a href="#home">
+          I
+          <i class="fa-solid fa-heart" style="color: red; font-size: 30px"></i>
+          Boracay</a
+        >
+      </h2>
+      <nav>
+        <ul id="myTopnav" class="myTopnav">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#attractions">Attractions</a></li>
+          <li><a href="#activities">Things To Do</a></li>
+          <li><a href="#gp">Gallery</a></li>
+        </ul>
+        <button class="hamburger" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+    <section class="home" id="home">
+      <div class="container">
+        <div class="text">
+          <h3>Escape to <span style="color: #65afeb">Boracay</span></h3>
+          <p>
+            Step into Boracay’s pristine beaches and vibrant waters. Whether you
+            seek adventure or serenity, your dream vacation starts here.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="attractions" id="attractions">
+      <h2>Attractions</h2>
+      <div class="at-block">
+        <div class="at-image"><img src="img/at1.jpg" alt="AT1" /></div>
+        <div class="at-text">
+          <h3>White <span>Beach</span></h3>
+          <br />
+          <p>
+            White Beach is inarguably the most famous beach in Boracay and the
+            most highlighted asset of Philippine tourism. The long stretch of
+            fine white sand has captured the hearts of many travelers worldwide.
+            It has repeatedly earned a place on numerous lists compiled by
+            various international travel organizations and magazines.
+          </p>
+          <br />
+          <p>
+            White Beach dominates two-thirds of the western coast of Boracay. It
+            is divided into three stations: Station 1 and 2 in Balabag and
+            Station 3 in Manoc-Manoc. As the island’s most developed and popular
+            area, business establishments such as accommodations, restaurants,
+            bars, cafés, and souvenir shops line the coast. Station 1 mostly
+            hosts luxury resorts, while Station 3 features budget lodgings. Most
+            restaurants and shops are located in Station 2, making it the base
+            for most tourists.
+          </p>
+          <br />
+          <p>
+            White Beach has quite the roster of activities for eager beachgoers
+            — sunbathing, swimming, sunset watching, and water sports
+            activities. It is also the main jump-off point for island-hopping
+            tours and diving trips.
+          </p>
+        </div>
+      </div>
+      <div class="at2">
+        <div class="at-block reverse">
+          <div class="at-image"><img src="img/at2.jpg" alt="AT2" /></div>
+          <div class="at-text">
+            <h3>Puka <span>Beach</span></h3>
+            <br />
+            <p>
+              No list of things to do on Boracay Island is complete without a
+              visit to Puka Beach. Named for the puka shells that once lined its
+              shores, Puka Beach offers a unique charm with its slightly coarser
+              sand and almost untouched beauty. A lush forest perches atop the
+              cliffs overlooking the beach, adding to its serene, natural
+              ambiance, and with fewer establishments, it feels refreshingly
+              peaceful.
+            </p>
+            <br />
+            <p>
+              Nestled on the northern tip of Boracay Island, Puka Beach is just
+              a 20-minute tricycle ride from White Beach. Bring a mat and plan
+              to stay awhile to fully enjoy this idyllic spot, which is included
+              in most Boracay island hopping tours. Its distance from the main
+              three stations means you’re likely to share this serene paradise
+              with only a few others.
+            </p>
+            <br />
+            <p>
+              Puka Beach is also an ideal spot to catch a glimpse of Boracay
+              Island’s majestic flying foxes. These fruit bats offer a
+              spectacular sight during their migration, and you can help protect
+              them by joining Friends of the Flying Foxes for a bat count.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="at-block">
+        <div class="at-image"><img src="img/at3.jpg" alt="AT1" /></div>
+        <div class="at-text">
+          <h3>Crystal <span>Cove</span></h3>
+          <br />
+          <p>
+            <span>Crystal Cove</span> is one of Boracay’s most picturesque
+            spots, located on the northern tip of the island. It is famous for
+            its crystal-clear waters, dramatic limestone cliffs, and natural
+            rock formations that create a unique and scenic landscape. The area
+            is perfect for travelers who want to experience a quieter side of
+            Boracay, away from the crowded beaches.
+          </p>
+          <br />
+          <p>
+            Visitors to Crystal Cove can explore its three main coves, each with
+            its own charm. The caves and rock tunnels provide fun exploration
+            opportunities, and the elevated viewpoints offer breathtaking
+            panoramic views of the ocean. It’s also a popular spot for swimming,
+            snorkeling, and capturing Instagram-worthy photos due to its natural
+            beauty.
+          </p>
+          <br />
+          <p>
+            Besides its natural attractions, Crystal Cove promotes eco-tourism,
+            ensuring that the area remains clean and preserved for future
+            visitors. Local guides are available to provide insights about the
+            island’s geology and marine life, enhancing the overall experience.
+            Whether you’re seeking adventure, relaxation, or stunning
+            landscapes, Crystal Cove is a must-visit destination in Boracay.
+          </p>
+        </div>
+      </div>
+      <div class="at2">
+        <div class="at-block reverse">
+          <div class="at-image"><img src="img/at4.jpg" alt="AT2" /></div>
+          <div class="at-text">
+            <h3>Cujo's <span>Keyhole</span></h3>
+            <br />
+            <p>
+              Cujo’s Keyhole is a hidden gem on Boracay Island, known for its
+              unique rock formations and secluded beach area. Its name comes
+              from the natural “keyhole” arch formed by the cliffs, creating a
+              picturesque and dramatic view that attracts photographers and
+              nature lovers. The spot offers a peaceful escape from the busier
+              tourist areas, making it ideal for relaxation and exploration.
+            </p>
+            <br />
+            <p>
+              Adventurous visitors can climb the surrounding rocks to reach the
+              keyhole itself, which frames the sparkling turquoise waters of the
+              sea perfectly. The area is also great for snorkeling and swimming
+              in calm, clear waters. Its natural formation provides a sense of
+              discovery, as each angle reveals a slightly different view of the
+              ocean and the surrounding cliffs.
+            </p>
+            <br />
+            <p>
+              Cujo’s Keyhole is also part of Boracay’s efforts to promote
+              eco-friendly tourism, so visitors are encouraged to keep the area
+              clean and respect the environment. Local guides are often
+              available to share interesting facts about the geological
+              formations and marine life nearby.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="activities" id="activities">
+      <h2>Things To Do</h2>
+      <div class="container">
+        <div class="ac-grid">
+          <div class="ac-card">
+            <img src="img/ac1.jpg" alt="" />
+            <h3>Paraw Sailing</h3>
+            <p>
+              The paraw sailing adventure is a quintessential Boracay Island
+              activity. A paraw is a local outrigger boat with two sails, the
+              traditional way of navigating Boracay Island and its neighboring
+              islands.
+            </p>
+          </div>
+          <div class="ac-card">
+            <img src="img/ac2.jpg" alt="" />
+            <h3>Banana Boat Ride</h3>
+            <p>
+              Joining a banana boat ride activity on Boracay Island is one of
+              the most exciting experiences you can have on your vacation.
+              Banana boats are giant yellow inflatable boats that can fit 10 to
+              20 people, perfect for groups of friends or family.
+            </p>
+          </div>
+          <div class="ac-card">
+            <img src="img/ac3.jpg" alt="" />
+            <h3>PARASAILING</h3>
+            <p>
+              Parasailing Boracay will give you one of the best views of the
+              whole island, particularly of its coastline. It is definitely one
+              of the most adrenaline-packed activities in Boracay!
+            </p>
+          </div>
+          <div class="ac-card">
+            <img src="img/ac4.jpg" alt="" />
+            <h3>Crystal Kayak</h3>
+            <p>
+              When it comes to travel photos of Boracay Island, there's nothing
+              more Instagrammable than the trending crystal kayak ride. You will
+              board a transparent kayak (commonly called a crystal kayak) where
+              the turquoise-colored water of Boracay Island is seen in full
+              glory.
+            </p>
+          </div>
+          <div class="ac-card">
+            <img src="img/ac5.jpg" alt="" />
+            <h3>Jet Ski</h3>
+            <p>
+              The exhilarating jet ski ride on Boracay Island is a must-try! It
+              usually lasts for about 15 to 30 minutes. You'll be given the
+              necessary instructions, such as the braking system, how to handle
+              the throttle, and how to shut it off in case of an emergency.
+            </p>
+          </div>
+          <div class="ac-card">
+            <img src="img/ac6.jpg" alt="" />
+            <h3>Kiteboarding</h3>
+            <p>
+              If you're an adrenaline seeker, kiteboarding on Boracay Island is
+              a thrilling way to experience the island's vibrant waters! This
+              high-energy sport combines surfing with the power of a large kite,
+              giving you the freedom to ride the waves with speed and skill.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="gp" id="gp">
+      <h2>Boracay Gallery</h2>
+      <div class="gallery">
+        <div class="left1"><img src="img/g2.jpg" alt="Boracay 1" /></div>
+        <div class="left2"><img src="img/g3.jpg" alt="Boracay 1" /></div>
+        <div class="left3"><img src="img/g4.jpg" alt="Boracay 1" /></div>
+        <div class="left4"><img src="img/g5.jpg" alt="Boracay 1" /></div>
+
+        <div class="center"><img src="img/g1.jpg" alt="Boracay 1" /></div>
+
+        <div class="right1"><img src="img/g6.jpg" alt="Boracay 1" /></div>
+        <div class="right2"><img src="img/g7.jpg" alt="Boracay 1" /></div>
+        <div class="right3"><img src="img/g8.jpg" alt="Boracay 1" /></div>
+        <div class="right4"><img src="img/g9.jpg" alt="Boracay 1" /></div>
+      </div>
+    </section>
+    <footer
+      style="
+        text-align: center;
+        padding: 20px;
+        background-color: #f2f2f2;
+        font-size: 14px;
+        color: #555;
+      "
+    >
+      &copy; Voltaire Florante // BSIS 4A
+    </footer>
+    <script>
+      const hamburger = document.querySelector(".hamburger");
+      const navbar = document.getElementById("myTopnav");
+      const icon = hamburger.querySelector("i");
+
+      hamburger.addEventListener("click", () => {
+        navbar.classList.toggle("responsive");
+
+        if (navbar.classList.contains("responsive")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-xmark");
+        } else {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      const navLinks = navbar.querySelectorAll("a");
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navbar.classList.remove("responsive");
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        });
+      });
+    </script>
+  </body>
+</html>
